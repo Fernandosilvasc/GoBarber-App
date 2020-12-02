@@ -1,18 +1,12 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable arrow-parens */
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 
-interface ToastProps {
+interface ContainerProps {
   type?: 'success' | 'error' | 'info';
   hasDescription: boolean;
 }
-
-export const Container = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 30px;
-  overflow: hidden;
-`;
 
 const toastTypeVariations = {
   info: css`
@@ -29,7 +23,7 @@ const toastTypeVariations = {
   `,
 };
 
-export const Toast = styled.div<ToastProps>`
+export const Container = styled(animated.div)<ContainerProps>`
   display: flex;
   width: 360px;
 
@@ -69,11 +63,11 @@ export const Toast = styled.div<ToastProps>`
     color: inherit;
   }
 
-  ${(props) => !props.hasDescription && css`
-    align-items: center;
+  ${props => !props.hasDescription && css`
+      align-items: center;
 
-    svg {
-      margin-top: 0;
-    }
-  `}
+      svg {
+        margin-top: 0;
+      }
+    `}
 `;
