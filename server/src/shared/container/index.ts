@@ -1,7 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import { container } from 'tsyringe';
 
-import "@modules/users/providers"
-import "./provider"
+import '@modules/users/providers';
+import './provider';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import AppointmentsRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
@@ -12,8 +13,18 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
-container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository);
+container.registerSingleton<IAppointmentsRepository>(
+  'AppointmentsRepository',
+  AppointmentsRepository,
+);
 
-container.registerSingleton<IAppointmentsRepository>('AppointmentsRepository', AppointmentsRepository);
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository,
+);
 
-container.registerSingleton<IUserTokensRepository>('UserTokensRepository', UserTokensRepository);
+
+container.registerSingleton<IUserTokensRepository>(
+  'UserTokensRepository',
+  UserTokensRepository,
+);

@@ -1,8 +1,9 @@
-import { getRepository, Repository } from "typeorm";
+/* eslint-disable import/no-unresolved */
+import { getRepository, Repository } from 'typeorm';
 
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 
-import UserToken from "../entities/UserToken";
+import UserToken from '../entities/UserToken';
 
 class UserTokensRepository implements IUserTokensRepository {
   private ormRepository: Repository<UserToken>;
@@ -22,7 +23,7 @@ class UserTokensRepository implements IUserTokensRepository {
   public async generate(user_id: string): Promise<UserToken> {
     const userToken = this.ormRepository.create({
       user_id,
-    })
+    });
 
     await this.ormRepository.save(userToken);
 

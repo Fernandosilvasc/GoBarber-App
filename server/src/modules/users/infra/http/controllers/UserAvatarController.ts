@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
+/* eslint-disable import/no-unresolved */
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
-import UpdateUserAvatarService from "@modules/users/services/UpdateUserAvatarService";
+import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 
 export default class UserAvatarController {
   async update(request: Request, response: Response): Promise<Response> {

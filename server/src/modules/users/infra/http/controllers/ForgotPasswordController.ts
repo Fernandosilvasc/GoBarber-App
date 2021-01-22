@@ -1,15 +1,18 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
+/* eslint-disable import/no-unresolved */
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
-import SendForgotPasswordEmailServices from "@modules/users/services/SendForgotPasswordEmailService";
+import SendForgotPasswordEmailService from '@modules/users/services/SendForgotPasswordEmailService';
 
 export default class ForgotPasswordController {
-  async create(request: Request, response: Response): Promise<Response> {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { email } = request.body;
 
-    const sendForgotPasswordEmail = container.resolve(SendForgotPasswordEmailServices);
+    const sendForgotPasswordEmail = container.resolve(
+      SendForgotPasswordEmailService,
+    );
 
-     await sendForgotPasswordEmail.execute({
+    await sendForgotPasswordEmail.execute({
       email,
     });
 

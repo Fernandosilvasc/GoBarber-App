@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
+/* eslint-disable import/no-unresolved */
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
-import CreateUserService from "@modules/users/services/CreateUserService";
+import CreateUserService from '@modules/users/services/CreateUserService';
 
 export default class UsersController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -18,7 +19,7 @@ export default class UsersController {
     delete user.password;
 
     return response.json(user);
-  };
+  }
 
   async update(request: Request, response: Response): Promise<Response> {
     const updatedUserAvatar = container.resolve(UpdateUserAvatarService);

@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
+/* eslint-disable import/no-unresolved */
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
-import AuthenticateUserService from "@modules/users/services/AuthenticateUserService";
+import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 
 export default class SessionsController {
   async create(request: Request, response: Response): Promise<Response> {

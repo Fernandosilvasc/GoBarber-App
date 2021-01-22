@@ -1,9 +1,11 @@
+/* eslint-disable import/no-unresolved */
 import { injectable, inject } from 'tsyringe';
 
-import IMailProvider from "@shared/container/provider/mailProvider/models/IMailProvider";
-import IUsersRepository from "../repositories/IUsersRepository";
-import IUserTokensRepository from "../repositories/IUserTokensRepository";
 import AppError from '@shared/errors/AppError';
+
+import IMailProvider from '@shared/container/provider/mailProvider/models/IMailProvider';
+import IUsersRepository from '../repositories/IUsersRepository';
+import IUserTokensRepository from '../repositories/IUserTokensRepository';
 
 interface IRequest {
   email: string;
@@ -26,14 +28,14 @@ class SendForgotPasswordEmailService {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError("User does not exists.")
+      throw new AppError('User does not exists.');
     }
 
-    await this.userTokensRepository.generate(user.id);
+    const { token } = await this.userTokensRepository.generate(user.id);
 
     await this.mailProvider.sendMail(
       email,
-      'Password recovery request received',
+      `Password recovery request received: ${token}`,
     );
   }
 }
