@@ -2,9 +2,9 @@
 
 **FN** //Functional Requirements
 
-- Users should be able to recover passwords through provided their email;
-- Users should receive an email with instructions to reset their password;
-- Users should be able to reset the password;
+- Users should be able to recover passwords through provided their email; ✅
+- Users should receive an email with instructions to reset their password; ✅
+- Users should be able to reset the password; ✅
 
 **NFR** // Non-functional Requirements
 
@@ -14,7 +14,7 @@
 
 **BR** // Business Requirements
 
-- The link that has been sent to reset the password should expire in 2h;
+- The link that has been sent to reset the password should expire in 2h; ✅
 - Users must confirm the new password by entering again the password;
 
 
@@ -22,7 +22,7 @@
 
 **FN** //Functional Requirements
 
-- Users should be able to update their name, email and password;
+- Users should be able to update their name, email and password; ✅
 
 **NFR** // Non-functional Requirements
 

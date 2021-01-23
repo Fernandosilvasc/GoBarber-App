@@ -1,10 +1,11 @@
-import { Request, Response, NextFunction } from "express";
-import { verify } from "jsonwebtoken";
-import authConfig from "@config/auth";
+/* eslint-disable import/no-unresolved */
+import { Request, Response, NextFunction } from 'express';
+import { verify } from 'jsonwebtoken';
+import authConfig from '@config/auth';
 
-import AppError from "@shared/errors/AppError";
+import AppError from '@shared/errors/AppError';
 
-interface TokenPayload {
+interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
@@ -13,20 +14,20 @@ interface TokenPayload {
 export default function isAuthorized(
   request: Request,
   response: Response,
-  next: NextFunction
+  next: NextFunction,
 ): void {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError("JWT token is missing", 401);
+    throw new AppError('JWT token is missing', 401);
   }
 
-  const [, token] = authHeader.split(" ");
+  const [, token] = authHeader.split(' ');
 
   try {
     const isTokenValid = verify(token, authConfig.jwt.secret);
 
-    const { sub } = isTokenValid as TokenPayload;
+    const { sub } = isTokenValid as ITokenPayload;
 
     request.user = {
       id: sub,
@@ -34,6 +35,6 @@ export default function isAuthorized(
 
     return next();
   } catch {
-    throw new AppError("Invalid JWT token", 401);
+    throw new AppError('Invalid JWT token', 401);
   }
 }

@@ -15,7 +15,7 @@ export default class SessionsController {
       password,
     });
 
-    delete user.password;
+    Reflect.deleteProperty(user, 'password');
 
     return response.json({ user, token });
   }

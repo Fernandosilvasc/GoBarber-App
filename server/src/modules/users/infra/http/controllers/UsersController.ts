@@ -5,7 +5,7 @@ import { container } from 'tsyringe';
 import CreateUserService from '@modules/users/services/CreateUserService';
 
 export default class UsersController {
-  async create(request: Request, response: Response): Promise<Response> {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { name, email, password } = request.body;
 
     const createUser = container.resolve(CreateUserService);
@@ -16,21 +16,21 @@ export default class UsersController {
       password,
     });
 
-    delete user.password;
+    Reflect.deleteProperty(user, 'password');
 
     return response.json(user);
   }
 
-  async update(request: Request, response: Response): Promise<Response> {
-    const updatedUserAvatar = container.resolve(UpdateUserAvatarService);
+  // async update(request: Request, response: Response): Promise<Response> {
+  //   const updatedUserAvatar = container.resolve(UpdateUserAvatarService);
 
-    const user = await updatedUserAvatar.execute({
-      user_id: request.user.id,
-      avatarFilename: request.file.filename,
-    });
+  //   const user = await updatedUserAvatar.execute({
+  //     user_id: request.user.id,
+  //     avatarFilename: request.file.filename,
+  //   });
 
-    delete user.password;
+  //   Reflect.deleteProperty(user, 'password');
 
-    return response.json(user);
-  }
+  //   return response.json(user);
+  // }
 }
