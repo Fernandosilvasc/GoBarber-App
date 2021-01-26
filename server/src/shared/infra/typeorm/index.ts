@@ -1,4 +1,7 @@
-import { createConnection } from "typeorm";
+import { createConnections } from 'typeorm';
 
-createConnection().then(() =>
-console.log('🗃  Successfully connected with database on port:5432'),);
+createConnections().then(() =>
+  console.log(
+    '⚙️  Successfully connected with postgresDB on port:5432 and mongoDB on port:27017',
+  ),
+);
