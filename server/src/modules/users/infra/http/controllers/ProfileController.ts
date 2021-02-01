@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import UpdateProfileService from '@modules/users/services/UpdateUserProfileService';
 import ShowProfileService from '@modules/users/services/ShowUserProfileService';
@@ -12,9 +13,9 @@ export default class ProfileController {
     const showProfile = container.resolve(ShowProfileService);
     const user = await showProfile.execute({ user_id });
 
-    Reflect.deleteProperty(user, 'password');
+    // Reflect.deleteProperty(user, 'password');
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -31,8 +32,8 @@ export default class ProfileController {
       old_password,
     });
 
-    Reflect.deleteProperty(user, 'password');
+    // Reflect.deleteProperty(user, 'password');
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 }

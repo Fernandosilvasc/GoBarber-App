@@ -1,7 +1,8 @@
-import FakeMailProvider from "@shared/container/provider/mailProvider/fakes/FakeMailProvider";
-import AppError from "@shared/errors/AppError";
+/* eslint-disable import/no-unresolved */
+import FakeMailProvider from '@shared/container/provider/mailProvider/fakes/FakeMailProvider';
+import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeUserTokensRepository from "../repositories/fakes/FakeUserTokensRepository";
+import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensRepository';
 import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
 
 let fakeUsersRepository: FakeUsersRepository;
@@ -19,8 +20,8 @@ describe('SendForgotPasswordEmail', () => {
       fakeUsersRepository,
       fakeMailProvider,
       fakeUserTokensRepository,
-      );
-  })
+    );
+  });
 
   it('should be able to recover the password using email', async () => {
     const sendMail = jest.spyOn(fakeMailProvider, 'sendMail');
@@ -39,9 +40,11 @@ describe('SendForgotPasswordEmail', () => {
   });
 
   it('should not be able to recover a non-existing user password', async () => {
-    await expect(sendForgotPasswordEmail.execute({
-      email: 'johndoe@example.com',
-    })).rejects.toBeInstanceOf(AppError);
+    await expect(
+      sendForgotPasswordEmail.execute({
+        email: 'johndoe@example.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should be able to generate a forgot password token', async () => {

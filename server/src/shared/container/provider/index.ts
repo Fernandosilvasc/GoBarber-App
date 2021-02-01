@@ -1,9 +1,13 @@
+/* eslint-disable import/no-unresolved */
 import { container } from 'tsyringe';
+
+import mailConfig from '@config/mail';
 
 import IStorageProvider from './storageProvider/models/IStorageProvider';
 import DiskStorageProvider from './storageProvider/implementations/DiskStorageProvider';
 
 import EtherealMailProvider from './mailProvider/implementations/EtherealMailProvider';
+import SESMailProvider from './mailProvider/implementations/SESMailProvider';
 import IMailProvider from './mailProvider/models/IMailProvider';
 
 import IMailTemplateProvider from './mailTemplateProvider/models/IMailTemplateProvider';
@@ -21,5 +25,7 @@ container.registerSingleton<IMailTemplateProvider>(
 
 container.registerInstance<IMailProvider>(
   'MailProvider',
-  container.resolve(EtherealMailProvider),
+  mailConfig.driver === 'ethereal'
+    ? container.resolve(EtherealMailProvider)
+    : container.resolve(SESMailProvider),
 );
