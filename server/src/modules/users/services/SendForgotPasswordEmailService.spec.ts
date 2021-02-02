@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import FakeMailProvider from '@shared/container/provider/mailProvider/fakes/FakeMailProvider';
+import FakeMailProvider from '@shared/container/providers/mailProvider/fakes/FakeMailProvider';
 import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeUserTokensRepository from '../repositories/fakes/FakeUserTokensRepository';

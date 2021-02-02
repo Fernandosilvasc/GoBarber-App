@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import IParseMailTemplateDTO from '@shared/container/provider/mailTemplateProvider/dtos/IParseMailTemplateDTO';
+import IParseMailTemplateDTO from '@shared/container/providers/mailTemplateProvider/dtos/IParseMailTemplateDTO';
 
 interface IMailContact {
   name: string;

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import AppError from '@shared/errors/AppError';
 
-import FakeStorageProvider from '@shared/container/provider/storageProvider/fakes/FakeStorageProvider';
+import FakeStorageProvider from '@shared/container/providers/storageProvider/fakes/FakeStorageProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 

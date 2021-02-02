@@ -4,7 +4,7 @@ import path from 'path';
 
 import AppError from '@shared/errors/AppError';
 
-import IMailProvider from '@shared/container/provider/mailProvider/models/IMailProvider';
+import IMailProvider from '@shared/container/providers/mailProvider/models/IMailProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
 
