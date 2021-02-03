@@ -1,17 +1,22 @@
 /* eslint-disable import/no-unresolved */
-import AppError from '@shared/errors/AppError';
 
+import FakeCacheProvider from '@shared/container/providers/cacheProvider/fakes/FakeCacheProvider';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
-import ListProviderService from './ListProvidersService';
+import ListProvidersService from './ListProvidersService';
 
 let fakeUsersRepository: FakeUsersRepository;
-let listProviders: ListProviderService;
+let fakeCacheProvider: FakeCacheProvider;
+let listProviders: ListProvidersService;
 
 describe('ListProviders', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
-    listProviders = new ListProviderService(fakeUsersRepository);
+    listProviders = new ListProvidersService(
+      fakeUsersRepository,
+      fakeCacheProvider,
+    );
   });
 
   it('Should be able to list the providers', async () => {
