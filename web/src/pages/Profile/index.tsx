@@ -92,8 +92,8 @@ const Profile: React.FC = () => {
 
         addToast({
           type: 'success',
-          title: 'Registration successful!',
-          description: 'You can now log on to GoBarber!',
+          title: 'Profile updated successfully!',
+          description: 'Profile information has been updated.',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
