@@ -121,7 +121,7 @@ const Profile: React.FC = () => {
 
   const handleUpdateAvatar = useCallback(() => {
     launchImageLibrary(
-      {mediaType : 'photo'},
+      {mediaType : 'photo', maxWidth: 200, maxHeight: 200},
       (response: any) => {
         if (response.didCancel) {
           return;
