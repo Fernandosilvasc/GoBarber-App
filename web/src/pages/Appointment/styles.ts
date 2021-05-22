@@ -115,48 +115,79 @@ export const CreateAppointment = styled.div`
   }
 `;
 
-export const Calendar = styled.aside`
-  width: 380px;
+export const DataPickerContainer = styled.div`
+  display: flex;
+`;
 
-  .DayPicker {
-    background: #28262e;
-    border-radius: 10px;
+export const Schedule = styled.div`
+
+  h3 {
+    font-size: 18px;
+    color: #999591;
+    font-family: 'RobotoSlab-Regular';
+    margin: 0 24px 30px;
   }
-  .DayPicker-wrapper {
-    padding-bottom: 0;
+`;
+
+export const Section = styled.div`
+  display: flex;
+  margin-bottom: 24px;
+  align-items: center;
+`;
+
+export const SectionTitle = styled.h4`
+  font-size: 18px;
+  color: #999591;
+  font-family: 'RobotoSlab-Regular';
+  margin: 0 24px 12px;
+`;
+
+export const SectionContent = styled.div`
+  display: flex;
+`;
+
+interface HourProps {
+  available: boolean;
+  selected: boolean;
+}
+
+interface HourTextProps {
+  selected: boolean;
+}
+
+export const Hour = styled.button<HourProps>`
+  padding: 12px;
+  background: ${(props) => (props.selected ? '#FF9000' : '#3e3b47')};
+  border: none;
+  border-radius: 10px;
+  margin-right: 8px;
+  opacity: ${(props) => (props.available ? 1 : 0.3)};
+`;
+
+export const HourText = styled.p<HourTextProps>`
+  color: ${(props) => (props.selected ? '#232129' : '#f4ede8')};
+  font-family: 'RobotoSlab-Regular';
+  font-size: 18px;
+`;
+
+export const CreateAppointmentButton = styled.button`
+  display: flex;
+  background: #ff9000;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  height: 50px;
+  margin: 0 24px 24px;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: ${shade(0.2, '#ff9000')};
   }
-  .DayPicker,
-  .DayPicker-Month {
-    width: 100%;
-  }
-  .DayPicker-Month {
-    border-collapse: separate;
-    border-spacing: 8px;
-    margin: 16px;
-  }
-  .DayPicker-Day {
-    width: 40px;
-    height: 40px;
-  }
-  .DayPicker-Day--available:not(.DayPicker-Day--outside) {
-    background: #3e3b47;
-    border-radius: 10px;
-    color: #fff;
-  }
-  .DayPicker:not(.DayPicker--interactionDisabled)
-    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
-    background: ${shade(0.2, '#3e3b47')};
-  }
-  .DayPicker-Day--today {
-    font-weight: normal;
-  }
-  .DayPicker-Day--disabled {
-    color: #666360 !important;
-    background: transparent !important;
-  }
-  .DayPicker-Day--selected {
-    background: #ff9000 !important;
-    border-radius: 10px;
-    color: #232129 !important;
-  }
+`;
+
+export const CreateAppointmentButtonText = styled.p`
+  color: #312e38;
+  font-size: 18px;
+  font-family: 'RobotoSlab-Medium';
 `;
