@@ -20,6 +20,7 @@ import {
   ProviderMeta,
   ProviderMetaText,
 } from './styles';
+import { TouchableOpacity } from 'react-native';
 
 export interface Provider {
   id: string;
@@ -32,8 +33,10 @@ const Dashboard: React.FC = () => {
   const navigation = useNavigation();
   const [providers, setProviders] = useState<Provider[]>([]);
 
+
   useEffect(() => {
     api.get('providers').then((response) => {
+      console.log(response.data)
       setProviders(response.data);
     });
   }, []);
@@ -48,6 +51,10 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <Header>
+        <TouchableOpacity onPress={() => signOut()}>
+          <Icon name="power" size={16} color="#ff9000" />
+        </TouchableOpacity>
+
         <HeaderTitle>
           Welcome, {'\n'}
           <UserName>{user.name}</UserName>
@@ -56,6 +63,8 @@ const Dashboard: React.FC = () => {
         <ProfileButton onPress={() => navigation.navigate('Profile')}>
           <UserAvatar source={{ uri: user.avatar_url }} />
         </ProfileButton>
+
+
       </Header>
 
       <ProvidersList

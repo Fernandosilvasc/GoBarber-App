@@ -3,35 +3,26 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable arrow-parens */
 /* eslint-disable object-curly-newline */
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { FiPower, FiClock } from 'react-icons/fi';
-import DayPicker, { DayModifiers } from 'react-day-picker';
+import React, { useState, useEffect, useMemo } from 'react';
+import { FiClock } from 'react-icons/fi';
 import { isToday, format, parseISO, isAfter } from 'date-fns';
+
 import 'react-day-picker/lib/style.css';
 
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
+import Header from '../../components/Header';
+import Calendar from '../../components/Calendar';
+
 import {
   Container,
-  Header,
-  HeaderContent,
-  Profile,
   Content,
   Schedule,
   NextAppointment,
   Section,
   Appointment,
-  Calendar,
 } from './styles';
-
-import logoImg from '../../assets/logo.svg';
-
-interface MonthAvailabilityItem {
-  day: number;
-  available: boolean;
-}
 
 interface AppointmentData {
   id: string;
@@ -43,37 +34,16 @@ interface AppointmentData {
   };
 }
 
+export interface Provider {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
+
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [currentMonth, setCurrentMonth] = useState(new Date());
   const [appointments, setAppointments] = useState<AppointmentData[]>([]);
-  const [monthAvailability, setMonthAvailability] = useState<
-    MonthAvailabilityItem[]
-  >([]);
-
-  const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
-    if (modifiers.available && !modifiers.disabled) {
-      setSelectedDate(day);
-    }
-  }, []);
-
-  const handleMonthChange = useCallback((month: Date) => {
-    setCurrentMonth(month);
-  }, []);
-
-  useEffect(() => {
-    api
-      .get(`/providers/${user.id}/month-availability`, {
-        params: {
-          year: currentMonth.getFullYear(),
-          month: currentMonth.getMonth() + 1,
-        },
-      })
-      .then(response => {
-        setMonthAvailability(response.data);
-      });
-  }, [currentMonth, user.id]);
 
   useEffect(() => {
     api
@@ -106,19 +76,6 @@ const Dashboard: React.FC = () => {
     });
   }, [appointments]);
 
-  const disabledDays = useMemo(() => {
-    const dates = monthAvailability
-      .filter(monthDay => monthDay.available === false)
-      .map(monthDay => {
-        const year = currentMonth.getFullYear();
-        const month = currentMonth.getMonth();
-
-        return new Date(year, month, monthDay.day);
-      });
-
-    return dates;
-  }, [currentMonth, monthAvailability]);
-
   const selectedDateAsText = useMemo(
     () => format(selectedDate, 'MMMM dd', {}),
     [selectedDate],
@@ -136,26 +93,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <HeaderContent>
-          <img src={logoImg} alt="GoBarber" />
-
-          <Profile>
-            <img src={user.avatar_url} alt={user.name} />
-            <div>
-              <span>Welcome,</span>
-              <Link to="/profile">
-                <strong>{user.name}</strong>
-              </Link>
-            </div>
-          </Profile>
-
-          <button type="button" onClick={signOut}>
-            <FiPower />
-          </button>
-        </HeaderContent>
-      </Header>
-
+      <Header data={{ signOut, user }} />
       <Content>
         <Schedule>
           <h1>Scheduled times</h1>
@@ -235,18 +173,7 @@ const Dashboard: React.FC = () => {
           </Section>
         </Schedule>
 
-        <Calendar>
-          <DayPicker
-            fromMonth={new Date()}
-            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
-            modifiers={{
-              available: { daysOfWeek: [1, 2, 3, 4, 5] },
-            }}
-            onMonthChange={handleMonthChange}
-            selectedDays={selectedDate}
-            onDayClick={handleDateChange}
-          />
-        </Calendar>
+        <Calendar data={{ userId: user.id, selectedDate, setSelectedDate }} />
       </Content>
     </Container>
   );

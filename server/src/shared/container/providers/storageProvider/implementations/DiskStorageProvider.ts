@@ -1,14 +1,15 @@
-import fs from "fs";
-import path from "path";
-import uploadConfig from "@config/upload";
-import IStorageProvider from "../models/IStorageProvider";
+/* eslint-disable import/no-unresolved */
+import fs from 'fs';
+import path from 'path';
+import uploadConfig from '@config/upload';
+import IStorageProvider from '../models/IStorageProvider';
 
 class DiskStorageProvider implements IStorageProvider {
   public async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
       path.resolve(uploadConfig.tmpFolder, file),
       path.resolve(uploadConfig.uploadsFolder, file),
-    )
+    );
 
     return file;
   }
@@ -17,12 +18,12 @@ class DiskStorageProvider implements IStorageProvider {
     const filePath = path.resolve(uploadConfig.tmpFolder, file);
 
     try {
-      await fs.promises.stat(filePath)
+      await fs.promises.stat(filePath);
     } catch {
-      return
+      return;
     }
 
-    await fs.promises.unlink(filePath)
+    await fs.promises.unlink(filePath);
   }
 }
 

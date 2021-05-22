@@ -70,7 +70,7 @@ const CreateAppointment: React.FC = () => {
 
     return today;
   }, []);
-  
+
   const [selectedDate, setSelectedDate] = useState(minimumDate);
 
   const { goBack, navigate } = useNavigation();
