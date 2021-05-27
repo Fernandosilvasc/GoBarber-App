@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 import { FiPower } from 'react-icons/fi';
+import UserAvatar from '../UserAvatar';
 
 import { Container, HeaderContent, Profile, NavTab } from './styles';
 
@@ -31,7 +32,9 @@ const Header: React.FC<HeaderProps> = ({ data }: HeaderProps) => {
         <img src={LogoImg} alt="GoBarber" />
 
         <Profile>
-          <img src={user.avatar_url} alt={user.name} />
+          {user.avatar_url && <img src={user.avatar_url} alt={user.name} />}
+          {!user.avatar_url && <UserAvatar name={user.name} />}
+
           <div>
             <span>Welcome,</span>
             <Link to="/profile">

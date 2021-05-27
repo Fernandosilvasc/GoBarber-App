@@ -8,6 +8,7 @@ import { FiCalendar } from 'react-icons/fi';
 import { format } from 'date-fns';
 import Header from '../../components/Header';
 import Calendar from '../../components/Calendar';
+import UseAvatar from '../../components/UserAvatar';
 
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -158,7 +159,10 @@ const Appointment: React.FC = () => {
               active={provider.id === selectedProvider}
               onClick={() => handleSelectProvider(provider.id)}
             >
-              <img src={provider.avatar_url} alt={provider.name} />
+              {provider.avatar_url && (
+                <img src={provider.avatar_url} alt={provider.name} />
+              )}
+              {!provider.avatar_url && <UseAvatar name={provider.name} />}
               <ProviderInfo>
                 <h2>{provider.name}</h2>
                 <ProviderMeta>

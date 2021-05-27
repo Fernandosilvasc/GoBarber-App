@@ -52,9 +52,22 @@ export const Content = styled.div`
 `;
 
 export const AvatarInput = styled.div`
+  display: flex;
+  justify-content: center;
   margin-bottom: 32px;
   position: relative;
-  align-self: center;
+  /* align-self: center; */
+
+  div {
+    width: 186px;
+    height: 186px;
+    border-radius: 50%;
+
+    p {
+      font-size: 3rem;
+    }
+  }
+
   img {
     width: 186px;
     height: 186px;
@@ -66,7 +79,7 @@ export const AvatarInput = styled.div`
     height: 48px;
     background-color: #ff9000;
     border-radius: 50%;
-    right: 0;
+    right: 80px;
     bottom: 0;
     border: 0;
     cursor: pointer;

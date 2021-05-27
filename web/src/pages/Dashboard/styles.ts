@@ -115,25 +115,33 @@ export const Appointment = styled.div`
       margin-right: 8px;
     }
   }
+`;
+
+export const UserDisplay = styled.div`
+  flex: 1;
+  background: #3e3b47;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 10px;
+  margin-left: 24px;
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #ff9000;
+  }
+  strong {
+    margin-left: 16px;
+    color: #f4ede8;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
   div {
-    flex: 1;
-    background: #3e3b47;
-    display: flex;
-    align-items: center;
-    padding: 16px;
-    border-radius: 10px;
-    margin-left: 24px;
-    img {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #ff9000;
-    }
-    strong {
-      margin-left: 16px;
-      color: #f4ede8;
-      font-size: 20px;
-      font-weight: 500;
+    p {
+      margin: 0px;
     }
   }
 `;

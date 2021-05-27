@@ -70,6 +70,10 @@ export const ProviderCard = styled.button<ProviderCardProps>`
     color: #ff9000;
   }
 
+  div {
+    border-color:#ff9000
+  }
+
 
   ${(props: { active: boolean }) => props.active
     && css`
@@ -82,6 +86,10 @@ export const ProviderCard = styled.button<ProviderCardProps>`
 
       h2 {
         font-weight: bold;
+      }
+
+      div {
+        border-color:#3e3b47
       }
     `}
 
@@ -96,6 +104,10 @@ export const ProviderCard = styled.button<ProviderCardProps>`
 
     h2 {
       font-weight: bold;
+    }
+
+    div {
+      border-color:#3e3b47
     }
   }
 `;

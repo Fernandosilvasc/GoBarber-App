@@ -14,6 +14,7 @@ import api from '../../services/api';
 
 import Header from '../../components/Header';
 import Calendar from '../../components/Calendar';
+import UserAvatar from '../../components/UserAvatar';
 
 import {
   Container,
@@ -22,6 +23,7 @@ import {
   NextAppointment,
   Section,
   Appointment,
+  UserDisplay,
 } from './styles';
 
 interface AppointmentData {
@@ -107,10 +109,15 @@ const Dashboard: React.FC = () => {
             <NextAppointment>
               <strong>Next Appointment</strong>
               <div>
-                <img
-                  src={nextAppointment.user.avatar_url}
-                  alt={nextAppointment.user.name}
-                />
+                {nextAppointment.user.avatar_url && (
+                  <img
+                    src={nextAppointment.user.avatar_url}
+                    alt={nextAppointment.user.name}
+                  />
+                )}
+                {!nextAppointment.user.avatar_url && (
+                  <UserAvatar name={nextAppointment.user.name} />
+                )}
                 <strong>{nextAppointment.user.name}</strong>
                 <span>
                   <FiClock />
@@ -134,14 +141,19 @@ const Dashboard: React.FC = () => {
                   {appointment.hourFormatted}
                 </span>
 
-                <div>
-                  <img
-                    src={appointment.user.avatar_url}
-                    alt={appointment.user.name}
-                  />
+                <UserDisplay>
+                  {appointment.user.avatar_url && (
+                    <img
+                      src={appointment.user.avatar_url}
+                      alt={appointment.user.name}
+                    />
+                  )}
+                  {!appointment.user.avatar_url && (
+                    <UserAvatar name={appointment.user.name} />
+                  )}
 
                   <strong>{appointment.user.name}</strong>
-                </div>
+                </UserDisplay>
               </Appointment>
             ))}
           </Section>
@@ -160,14 +172,19 @@ const Dashboard: React.FC = () => {
                   {appointment.hourFormatted}
                 </span>
 
-                <div>
-                  <img
-                    src={appointment.user.avatar_url}
-                    alt={appointment.user.name}
-                  />
+                <UserDisplay>
+                  {appointment.user.avatar_url && (
+                    <img
+                      src={appointment.user.avatar_url}
+                      alt={appointment.user.name}
+                    />
+                  )}
+                  {!appointment.user.avatar_url && (
+                    <UserAvatar name={appointment.user.name} />
+                  )}
 
                   <strong>{appointment.user.name}</strong>
-                </div>
+                </UserDisplay>
               </Appointment>
             ))}
           </Section>
