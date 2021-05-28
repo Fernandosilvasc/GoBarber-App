@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable indent */
 /* eslint-disable object-curly-newline */
@@ -56,9 +57,9 @@ const Appointment: React.FC = () => {
   const minimumDate = useMemo(() => {
     const today = new Date();
 
-    // if (today.getHours() >= 17) {
-    //   return new Date(today.setDate(today.getDate() + 1));
-    // }
+    if (today.getHours() >= 17) {
+      return new Date(today.setDate(today.getDate() + 1));
+    }
 
     return today;
   }, []);
@@ -68,6 +69,7 @@ const Appointment: React.FC = () => {
   useEffect(() => {
     api.get('providers').then(response => {
       setProviders(response.data);
+      console.log(response.data);
       setSelectedProvider(response.data[0].id);
     });
   }, []);
